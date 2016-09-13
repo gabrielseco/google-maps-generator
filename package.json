@@ -4,7 +4,8 @@
   "description": "a google maps random generator",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js",
+    "start": "NODE_ENV=production node server.js ",
+    "dev": "NODE_ENV=development nodemon server.js",
     "webpack": "node webpack/WebpackDev.js",
     "build": "webpack -p --config ./webpack.dist.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"

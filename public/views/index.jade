@@ -12,14 +12,16 @@ html
     form(action='google-maps-action' method='post')
       div.form-group
         label(for='place_1') Place
-        input(type='text' name='place_1' id='place_1' value='#{params.place_1}')
+        input(type='text' name='place_1' id='place_1' value='#{params.place_1}' autocomplete='off')
       div.form-group
         label(for='items') Items
-        input(type='number' name='items' id='items' value='#{params.items}' autocomplete='false')
-      input(type='hidden' name='markers' id='markers' value='#{params.markers}' autocomplete='false')
+        input(type='number' name='items' id='items' value='#{params.items}' autocomplete='off')
+      input(type='hidden' name='markers' id='markers' value='#{params.markers}')
       input(type='submit' value='generate')
     div.coding_area.hidden#code
-    script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBe9vX3Og0NopopDywMCv23xx_AkGYpn20")
+    script(src="https://maps.googleapis.com/maps/api/js?key=#{env.API_KEY}")
     script(src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js")
-    //script(src="http://localhost:8000/assets/bundle.js")
-    script(src="javascripts/bundle.js")
+    if env.NODE_ENV === 'production'
+      script(src="javascripts/bundle.js")
+    else
+      script(src="http://localhost:8000/assets/bundle.js")

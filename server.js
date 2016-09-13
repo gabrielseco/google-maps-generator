@@ -54,6 +54,9 @@ app.use(bodyParser.urlencoded({
 app.set('view engine', 'jade');
 app.set('views', path.join(__dirname, '/public/views'));
 
+app.locals.env = process.env;
+
+
 let db;
 
 // Connect to the database before starting the application server.
@@ -129,7 +132,7 @@ app.post('/google-maps-action', (req, res) => {
       //console.log('results',results);
     });
 
-    res.render('index.jade', {params: params});
+    res.render('index.jade', {title: 'Welcome to Google Maps Generator' ,params: params});
 
 });
 
