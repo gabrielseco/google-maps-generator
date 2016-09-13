@@ -1,0 +1,23 @@
+html
+  head
+    title!= title
+    link(href='https://fonts.googleapis.com/css?family=Playfair+Display' rel='stylesheet')
+    link(href='/stylesheets/normalize.css', rel='stylesheet')
+    link(href='/stylesheets/index.css', rel='stylesheet')
+    link(href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css' rel='stylesheet')
+
+  body
+    div#map
+    form(action='google-maps-action' method='post')
+      div.form-group
+        label(for='place_1') Place
+        input(type='text' name='place_1' id='place_1' value='#{params.place_1}')
+      div.form-group
+        label(for='items') Items
+        input(type='number' name='items' id='items' value='#{params.items}' autocomplete='false')
+      input(type='hidden' name='markers' id='markers' value='#{params.markers}' autocomplete='false')
+      input(type='submit' value='generate')
+    div.coding_area.hidden#code
+    script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBe9vX3Og0NopopDywMCv23xx_AkGYpn20")
+    script(src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js")
+    script(src="http://localhost:8000/assets/bundle.js")
