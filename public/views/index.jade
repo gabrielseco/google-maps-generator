@@ -11,8 +11,8 @@ html
     div#map
     form(action='google-maps-action' method='post')
       div.form-group
-        label(for='place_1') Place
-        input(type='text' name='place_1' id='place_1' value='#{params.place_1}' autocomplete='off')
+        label(for='place_1') Address
+        input(type='text' name='place_1' id='place_1' value='#{params.place_1}' autocomplete='off' placeholder='Search for an address')
       div.form-group
         label(for='items') Items
         input(type='number' name='items' id='items' value='#{params.items}' autocomplete='off')

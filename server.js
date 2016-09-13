@@ -78,7 +78,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
 });
 
 app.get('/', function(req, res){
-  res.render('index', { title: 'Welcome to Google Maps Generator', params:{place_1: '', items:100, markers:''}});
+  res.render('index', { title: 'Welcome to Google Maps Generator', params:{place_1: '', items:10, markers:''}});
 });
 
 app.get('/tracking-101', (req, res) => {
