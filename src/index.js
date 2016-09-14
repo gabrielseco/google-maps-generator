@@ -6,10 +6,14 @@ import setMarker from './setMarker';
   'use strict';
   const map = document.querySelector('#map');
   let markers = document.querySelector('#markers').value;
-  const code    = document.querySelector('#code');
+  const code  = document.querySelector('#code');
 
 
   const {coords} = await getPosition();
+
+  console.log('coords',coords);
+
+  document.getElementById('local').value = JSON.stringify({lat: coords.latitude, lng: coords.longitude});
 
   const maps = new google.maps.Map(map, { //eslint-disable-line
     center: {lat: coords.latitude, lng: coords.longitude},
@@ -18,9 +22,13 @@ import setMarker from './setMarker';
 
   if(markers.length > 0){
     markers = JSON.parse(markers);
-    markers.map(marker => setMarker(marker, maps));
-    maps.setCenter(markers[markers.length - 1]);
-    maps.setZoom(15);
+    const markersOnMap = markers.map(marker => setMarker(marker, maps));
+
+    let bounds = new google.maps.LatLngBounds();//eslint-disable-line
+    markersOnMap.map(marker => bounds.extend(marker.getPosition()));
+    
+    maps.fitBounds(bounds);
+
     code.className="";
     code.innerHTML = `<pre>var markers = ${JSON.stringify(markers,null, 4)};</pre>`;
   }

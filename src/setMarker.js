@@ -4,4 +4,6 @@ export default function setMarker(position, map){
    position: position,
    map: map
  });
+
+  return marker;
 }

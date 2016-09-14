@@ -82,9 +82,7 @@ app.get('/', function(req, res){
 });
 
 
-app.get('*', (req, res) => {
-  res.redirect('/');
-});
+
 
 app.get('/tracking-101', (req, res) => {
   let docs = [];
@@ -112,9 +110,11 @@ app.post('/google-maps-action', (req, res) => {
   const params = {
     place_1: req.body.place_1,
     items: req.body.items,
+    coords: JSON.parse(req.body.local),
     ip:req.headers['x-forwarded-for'] || req.connection.remoteAddress,
     date: new Date(),
-    google_maps:[]
+    originalPlace: null,
+    markers:[]
   };
 
   async.parallel({
@@ -128,14 +128,24 @@ app.post('/google-maps-action', (req, res) => {
         }
       });
 
+    },
+    local:function(callback){
+      request(URL.ENDPOINT +'?latlng='+params.coords.lat+","+params.coords.lng+"&key="+process.env.GEO_API_KEY, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+          callback(null, JSON.parse(body));
+        }
+      });
     }
 }, function(err, results) {
     const markers = calculateMarkers(results.place_1, params.items);
-    params.google_maps.push(results.place_1);
-    params.markers = JSON.stringify(markers);
+    params.markers = markers;
+    params.originalPlace = results.local;
+
     db.collection('tracking').insert(params, function(err, results){
       //console.log('results',results);
     });
+
+    params.markers = JSON.stringify(markers);
 
     res.render('index.jade', {title: 'Welcome to Google Maps Generator' ,params: params});
 
@@ -143,4 +153,8 @@ app.post('/google-maps-action', (req, res) => {
 
 
 
+});
+
+app.get('*', (req, res) => {
+  res.redirect('/');
 });
