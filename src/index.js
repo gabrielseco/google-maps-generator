@@ -8,10 +8,7 @@ import setMarker from './setMarker';
   let markers = document.querySelector('#markers').value;
   const code  = document.querySelector('#code');
 
-
   const {coords} = await getPosition();
-
-  console.log('coords',coords);
 
   document.getElementById('local').value = JSON.stringify({lat: coords.latitude, lng: coords.longitude});
 
@@ -26,7 +23,7 @@ import setMarker from './setMarker';
 
     let bounds = new google.maps.LatLngBounds();//eslint-disable-line
     markersOnMap.map(marker => bounds.extend(marker.getPosition()));
-    
+
     maps.fitBounds(bounds);
 
     code.className="";

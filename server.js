@@ -114,7 +114,8 @@ app.post('/google-maps-action', (req, res) => {
     ip:req.headers['x-forwarded-for'] || req.connection.remoteAddress,
     date: new Date(),
     originalPlace: null,
-    markers:[]
+    markers:[],
+    env: process.env.NODE_ENV
   };
 
   async.parallel({
