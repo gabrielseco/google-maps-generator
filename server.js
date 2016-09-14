@@ -81,6 +81,11 @@ app.get('/', function(req, res){
   res.render('index', { title: 'Welcome to Google Maps Generator', params:{place_1: '', items:10, markers:''}});
 });
 
+
+app.get('*', (req, res) => {
+  res.redirect('/');
+});
+
 app.get('/tracking-101', (req, res) => {
   let docs = [];
   const cursor = db.collection('tracking').find({});
