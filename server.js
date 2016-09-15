@@ -7,6 +7,9 @@ const request    = require('request');
 const async      = require('async');
 const ObjectID   = mongodb.ObjectID;
 
+require('newrelic');
+
+
 dotenv.config();
 
 const URL = {

@@ -15,8 +15,8 @@
   "author": "Gabriel Seco",
   "license": "FM",
   "engines": {
-		"node": "6.5.0"
-	},
+    "node": "6.5.0"
+  },
   "dependencies": {
     "async": "^2.0.1",
     "body-parser": "^1.15.2",
@@ -24,6 +24,7 @@
     "express": "^4.14.0",
     "jade": "^1.11.0",
     "mongodb": "^2.2.9",
+    "newrelic": "^1.30.3",
     "request": "^2.74.0"
   },
   "devDependencies": {
