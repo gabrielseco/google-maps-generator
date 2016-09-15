@@ -20,4 +20,4 @@ npm run webpack
 
 ## Website ##
 
-You can generate data in [heroku](https://radiant-meadow-41249.herokuapp.com/)
+You can generate data in [heroku](https://google-maps-generator.herokuapp.com/)
